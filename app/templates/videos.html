@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% for req in requests %}
+    <p>
+        <table cellspacing="2" cellpadding="2" border="0">
+            <tr><td class="songLabel">Dance</td><td class="metaData">{{ req.dance }}</td></tr>
+            <tr><td class="songLabel">Song</td><td class="metaData">{{ req.songTitle }}</td></tr>
+            <tr><td class="songLabel">Artist</td><td class="metaData">{{ req.artist }}</td></tr>
+            {% if req.note %}
+                <tr><td class="songLabel">Note</td><td class="metaData">{{ req.note }}</td></tr>
+            {% endif %}
+        </table>
+        {{ req.youTubeEmbed|safe }}
+    </p>
+    <hr/>
+{% endfor %}
+{% endblock %}
