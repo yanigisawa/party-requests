@@ -3,15 +3,20 @@ from flask import render_template, request, Markup
 import gspread
 import os
 
+# GETTING UNICODE RIGHT IN PYTHON
+# http://blog.notdot.net/2010/07/Getting-unicode-right-in-Python
+# Note: All strings in python are byte strings
+# To encode a text string as bytes: var.encode(encoding)
+# To decode a byte string as test: var.decode(encoding)
 
 class PartyRequest():
     def __init__(self, request = False, dance = "", songTitle = "", artist = "", youTubeEmbed = "", note = ""):
         self._request = request
-        self._dance = dance
-        self._songTitle = songTitle
-        self._artist = artist
-        self._youTubeEmbed = youTubeEmbed
-        self.note = note
+        self._dance = dance.encode('utf-8').strip()
+        self._songTitle = songTitle.encode('utf-8').strip()
+        self._artist = artist.encode('utf-8').strip()
+        self._youTubeEmbed = youTubeEmbed.encode('utf-8').strip()
+        self.note = note.encode('utf-8').strip()
 
     @property
     def request(self):
@@ -19,24 +24,27 @@ class PartyRequest():
 
     @property
     def dance(self):
-        return self._dance.encode('utf-8').strip()
+        return self._dance.decode('utf-8')
 
     @property
     def songTitle(self):
-        return self._songTitle.encode('utf-8').strip()
+        return self._songTitle.decode('utf-8')
 
     @property
     def artist(self):
-        return self._artist.encode('utf-8').strip()
+        return self._artist.decode('utf-8')
 
     @property
     def youTubeEmbed(self):
-        return self._youTubeEmbed.encode('utf-8').strip()
+        return self._youTubeEmbed.decode('utf-8')
 
     def __repr__(self):
         return "{0} - {1} - {2} - {3} - {4}".format(self.request,
             self.dance, self.songTitle,
             self.artist, self.youTubeEmbed)
+
+class ViewModel():
+    pass
 
 def getRequestsWorkSheet():
     username = os.environ.get('PARTY_REQUESTS_USER')
@@ -67,7 +75,7 @@ def getRequestsFromWorkSheet(sheet):
     allWorksheetRows = sheet.get_all_values()
     for row in allWorksheetRows:
         request = getRequestFromWorksheetRow(row)
-        if request.dance != "Dance" and request.request:
+        if request.dance != "Dance" and request.request and request.dance:
             allRequests.append(request)
 
     return allRequests
@@ -80,7 +88,10 @@ def printRequests(requestList):
 def index():
     sheet = getRequestsWorkSheet()
     requests = getRequestsFromWorkSheet(sheet)
-    return render_template("videos.html", requests = requests)
+    viewModel = ViewModel()
+    viewModel.requests = requests
+    viewModel.requestCount = len(requests)
+    return render_template("videos.html", model = viewModel)
 
 
 
