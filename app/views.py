@@ -10,13 +10,21 @@ import os
 # To decode a byte string as test: var.decode(encoding)
 
 class PartyRequest():
-    def __init__(self, request = False, dance = "", songTitle = "", artist = "", youTubeEmbed = "", note = ""):
+    def __init__(self, 
+            request = False, 
+            dance = "", 
+            songTitle = "", 
+            artist = "", 
+            youTubeEmbed = "", 
+            note = "",
+            order = ""):
         self._request = request
         self._dance = dance.encode('utf-8').strip()
         self._songTitle = songTitle.encode('utf-8').strip()
         self._artist = artist.encode('utf-8').strip()
         self._youTubeEmbed = youTubeEmbed.encode('utf-8').strip()
         self.note = note.encode('utf-8').strip()
+        self._order = order.encode('utf-8').strip()
 
     @property
     def request(self):
@@ -37,6 +45,10 @@ class PartyRequest():
     @property
     def youTubeEmbed(self):
         return self._youTubeEmbed.decode('utf-8')
+
+    @property
+    def order(self):
+        return self._order.decode('utf-8')
 
     def __repr__(self):
         return "{0} - {1} - {2} - {3} - {4}".format(self.request,
@@ -64,7 +76,8 @@ def getRequestFromWorksheetRow(row):
         songTitle = row[2],
         artist = row[3],
         youTubeEmbed = row[4],
-        note = row[6])
+        note = row[6],
+        order = row[5])
     if row[0].strip():
         request.request = True
 
@@ -89,7 +102,7 @@ def index():
     sheet = getRequestsWorkSheet()
     requests = getRequestsFromWorkSheet(sheet)
     viewModel = ViewModel()
-    viewModel.requests = requests
+    viewModel.requests = sorted(requests, key = lambda x: x.order)
     viewModel.requestCount = len(requests)
     return render_template("videos.html", model = viewModel)
 
