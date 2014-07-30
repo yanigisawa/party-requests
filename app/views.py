@@ -11,24 +11,22 @@ import os
 
 class PartyRequest():
     def __init__(self, 
-            request = False, 
+            request = "", 
             dance = "", 
             songTitle = "", 
             artist = "", 
             youTubeEmbed = "", 
-            note = "",
-            order = ""):
+            note = ""):
         self._request = request
         self._dance = dance.encode('utf-8').strip()
         self._songTitle = songTitle.encode('utf-8').strip()
         self._artist = artist.encode('utf-8').strip()
         self._youTubeEmbed = youTubeEmbed.encode('utf-8').strip()
         self.note = note.encode('utf-8').strip()
-        self._order = order.encode('utf-8').strip()
 
     @property
     def request(self):
-        return self._request
+        return self._request.decode('utf-8')
 
     @property
     def dance(self):
@@ -72,14 +70,12 @@ def getRequestsWorkSheet():
 
 def getRequestFromWorksheetRow(row):
     request = PartyRequest(
+       request = row[0], 
         dance = row[1],
         songTitle = row[2],
         artist = row[3],
         youTubeEmbed = row[4],
-        note = row[6],
-        order = row[5])
-    if row[0].strip():
-        request.request = True
+        note = row[5])
 
     return request
 
@@ -102,7 +98,7 @@ def index():
     sheet = getRequestsWorkSheet()
     requests = getRequestsFromWorkSheet(sheet)
     viewModel = ViewModel()
-    viewModel.requests = sorted(requests, key = lambda x: x.order)
+    viewModel.requests = sorted(requests, key = lambda x: x.request)
     viewModel.requestCount = len(requests)
     return render_template("videos.html", model = viewModel)
 
