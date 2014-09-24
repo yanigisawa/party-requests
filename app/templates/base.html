@@ -26,16 +26,22 @@
         .songLabel { width: 70px; text-align: left; }
         .metaData { font-weight: bold; }
         td { padding: 2px; font-size: 1.25em; }
-        table { margin-bottom: 15px; }
+        table { margin-bottom: 15px; clear: both; }
+        .title { position: absolute; margin: 394px 0 0 35px; color: #ffffff}
+
+        .image { position: relative; width: 100%; }
+
     </style>
 </head>
 <body role="document">
 
     <div class="container" role="main">
 
-        <div class="page-header">
-            <h2>Dance Party Requests ({{ model.requestCount }})</h2>
+        <div class="page-header image">
+            <h2 class="title">Dance Party Requests ({{ model.requestCount }})</h2>
+            <img src="static/party time sean 5x7.png" />
         </div>
+
         {% block content %}{% endblock %}
 
     </div>
