@@ -42,7 +42,7 @@ def getRequestsWorkSheet():
 
     client = gspread.login(username, password)
 
-    workbook = client.open_by_url('https://docs.google.com/spreadsheet/ccc?key=0AqcS_eDL_8umdHVGTklWRWNwdGNpRzFpUExFOThnLXc&usp=sharing')
+    workbook = client.open_by_url('https://docs.google.com/spreadsheets/d/1OFZzc-IbLhDgV5ylfQwEKg5ICJ78x5iJzSBcgVy5YnY/edit?usp=sharing')
 
     return workbook.worksheet("Sheet 1")
 
