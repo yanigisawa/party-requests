@@ -2,6 +2,7 @@ from app import app
 from flask import render_template, request, Markup
 import gspread
 import os
+from oauth2client.client import SignedJwtAssertionCredentials
 
 # GETTING UNICODE RIGHT IN PYTHON
 # http://blog.notdot.net/2010/07/Getting-unicode-right-in-Python
@@ -57,14 +58,24 @@ class ViewModel():
     pass
 
 def getRequestsWorkSheet():
+    """
+    Google recently (4/20/2015) removed the ability to use an App Specific
+    password to authenticate with an account. As such, the user and password
+    fields should be filled with the JWT token client_email and
+    private_key fields instead of an actual email and App Specific password
+    """
     username = os.environ.get('PARTY_REQUESTS_USER')
     password = os.environ.get('PARTY_REQUESTS_PASSWORD')
     if not username or not password:
         raise StandardError('Could not find username or password environment variables.')
 
-    client = gspread.login(username, password)
+    scope = ['https://spreadsheets.google.com/feeds']
 
-    workbook = client.open_by_url('https://docs.google.com/spreadsheets/d/1OFZzc-IbLhDgV5ylfQwEKg5ICJ78x5iJzSBcgVy5YnY/edit?usp=sharing')
+    credentials = SignedJwtAssertionCredentials(username, password, scope)
+
+    gc = gspread.authorize(credentials)
+
+    workbook = gc.open('Dance Requests')
 
     return workbook.worksheet("Sheet 1")
 
@@ -101,6 +112,4 @@ def index():
     viewModel.requests = sorted(requests, key = lambda x: x.request)
     viewModel.requestCount = len(requests)
     return render_template("videos.html", model = viewModel)
-
-
 
