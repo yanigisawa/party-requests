@@ -3,14 +3,18 @@
 
 {% for req in model.requests %}
     <p>
-        <table cellspacing="2" cellpadding="2" border="0">
-            <tr><td class="songLabel">Dance</td><td class="metaData">{{ req.dance }}</td></tr>
-            <tr><td class="songLabel">Song</td><td class="metaData">{{ req.songTitle }}</td></tr>
-            <tr><td class="songLabel">Artist</td><td class="metaData">{{ req.artist }}</td></tr>
+        <dl class='dl-horizontal'>
+            <dt >Dance</dt>
+            <dd >{{ req.dance }}</dd>
+            <dt >Song</dt>
+            <dd >{{ req.songTitle}}</dd>
+            <dt >Artist</dt>
+            <dd >{{ req.artist}}</dd>
             {% if req.note %}
-                <tr><td class="songLabel">Note</td><td class="metaData">{{ req.note }}</td></tr>
+            <dt >Note</dt>
+            <dd >{{ req.note }} </dd>
             {% endif %}
-        </table>
+        </dl>
         {{ req.youTubeEmbed|safe }}
     </p>
     <hr/>

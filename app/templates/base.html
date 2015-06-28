@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="utf-8">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
     <link rel="icon" href="static/favicon.ico">
 
-    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Party Requests</title>
@@ -22,15 +22,11 @@
     <![endif]-->
 
     <style>
-        li { display: block; }
-        .songLabel { width: 70px; text-align: left; }
-        .metaData { font-weight: bold; }
-        td { padding: 2px; font-size: 1.25em; }
-        table { margin-bottom: 15px; clear: both; }
         .title { position: absolute; margin: 394px 0 0 35px; color: #ffffff}
-
         .image { position: relative; width: 100%; }
-
+        dl { font-size: 1.5em }
+        dl.dl-horizontal dt { float: left; width: 61px; font-weight: normal; text-align: left; }
+        dl.dl-horizontal dd { margin-left: 94px; font-weight: 700; overflow: hidden; }
     </style>
 </head>
 <body role="document">
@@ -44,11 +40,12 @@
 
         {% block content %}{% endblock %}
 
+        <a href='https://docs.google.com/spreadsheets/d/1OFZzc-IbLhDgV5ylfQwEKg5ICJ78x5iJzSBcgVy5YnY/edit?usp=sharing' target='_blank'>Google Spreadhseet</a>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </body>
 </html>
