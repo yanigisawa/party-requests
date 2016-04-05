@@ -8,7 +8,7 @@ from oauth2client.client import SignedJwtAssertionCredentials
 # http://blog.notdot.net/2010/07/Getting-unicode-right-in-Python
 # Note: All strings in python are byte strings
 # To encode a text string as bytes: var.encode(encoding)
-# To decode a byte string as test: var.decode(encoding)
+# To decode a byte string as text: var.decode(encoding)
 
 class PartyRequest():
     def __init__(self, 
