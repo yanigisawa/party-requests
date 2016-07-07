@@ -34,7 +34,12 @@
     <div class="container" role="main">
 
         <div class="page-header image">
-            <h2>Dance Party Requests ({{ model.requestCount }})</h2>
+            <h2>Dance Party Requests</h2>
+            {% if model.requestCount == 1 %}
+              <h3>There is one request</h3>
+            {% else %}
+              <h3>There are {{ model.requestCount }} requests</h3>
+            {% endif %}
             <!--<img src="static/party time sean 5x7.png" /> -->
         </div>
 
