@@ -17,12 +17,14 @@ class PartyRequest():
             songTitle = "", 
             artist = "", 
             youTubeEmbed = "", 
-            note = ""):
+            note = "",
+            spotifyEmbed = ""):
         self._request = request
         self._dance = dance.encode('utf-8').strip()
         self._songTitle = songTitle.encode('utf-8').strip()
         self._artist = artist.encode('utf-8').strip()
         self._youTubeEmbed = youTubeEmbed.encode('utf-8').strip()
+        self._spotifyEmbed = spotifyEmbed.encode('utf-8').strip()
         self.note = note.encode('utf-8').strip()
 
     @property
@@ -44,6 +46,17 @@ class PartyRequest():
     @property
     def youTubeEmbed(self):
         return self._youTubeEmbed.decode('utf-8')
+
+    @property
+    def spotifyEmbed(self):
+        return self._spotifyEmbed.decode('utf-8')
+
+    @property
+    def embedCode(self):
+        if len(self._spotifyEmbed.strip()) > 0 :
+            return self.spotifyEmbed
+        else:
+            return self.youTubeEmbed
 
     @property
     def order(self):
@@ -86,7 +99,8 @@ def getRequestFromWorksheetRow(row):
         songTitle = row[2],
         artist = row[3],
         youTubeEmbed = row[4],
-        note = row[5])
+        note = row[6],
+        spotifyEmbed = row[5])
 
     return request
 
