@@ -104,12 +104,30 @@ def printRequests(requestList):
     for request in requestList:
         print(request)
 
+def getRowsFromRequests(requests):
+    orderedRequests = sorted(requests, key = lambda x: x.request)
+    rows = []
+    row = []
+    count = 0
+    for req in orderedRequests:
+        # if len(row) == 2:
+        #     rows.append(row)
+        #     row = []
+
+        req.id = count
+        row.append(req)
+        count += 1
+
+    rows.append(row)
+    return (rows, count)
+
 @app.route('/')
 def index():
     sheet = getRequestsWorkSheet()
     requests = getRequestsFromWorkSheet(sheet)
+    rows, count = getRowsFromRequests(requests)
     viewModel = ViewModel()
-    viewModel.requests = sorted(requests, key = lambda x: x.request)
-    viewModel.requestCount = len(requests)
+    viewModel.rows = rows
+    viewModel.requestCount = count
     return render_template("videos.html", model = viewModel)
 

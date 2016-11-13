@@ -24,8 +24,8 @@
     <style>
         .title { position: absolute; margin: 394px 0 0 35px; color: #ffffff}
         .image { position: relative; width: 100%; }
-        dl { font-size: 1.5em }
-        dl.dl-horizontal dt { float: left; width: 61px; font-weight: normal; text-align: left; }
+        dl { font-size: 1.5em; margin-bottom: 10px; }
+        dl.dl-horizontal dt { float: left; width: 80px; font-weight: normal; text-align: left; }
         dl.dl-horizontal dd { margin-left: 94px; font-weight: 700; overflow: hidden; }
     </style>
 </head>
@@ -41,6 +41,8 @@
               <h3>There are {{ model.requestCount }} requests</h3>
             {% endif %}
             <!--<img src="static/party time sean 5x7.png" /> -->
+        <p>Click the remove button above each video after it has been played.</p>
+        <p>If you accidentally click the Remove button, refresh the page to restore all videos.</p>
         </div>
 
         {% block content %}{% endblock %}
@@ -52,5 +54,50 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script language='javascript'>
+    
+		function getStateName(stateId) {
+			switch (stateId) {
+			  case -1: return 'unstarted';
+        case 0: return 'ended';
+        case 1: return 'playing';
+        case 2: return 'pause';
+        case 3: return 'buffering';
+        case 5: return 'video cued';
+        default: return 'other state';
+			}
+		}
+
+		function player_state_changed(state) {
+			/* This event is fired whenever the player's state changes.
+				Possible values are:
+				- unstarted (-1)
+				- ended (0)
+				- playing (1)
+				- paused (2) 
+				- buffering (3)
+				- video cued (5). 
+				When the SWF is first loaded it will broadcast an unstarted (-1) event.
+				When the video is cued and ready to play it will broadcast a video cued event (5).
+			*/
+
+			console.log('state ' + state + ' triggered. Name: ' + getStateName(state));
+			if (state == 1 || state == 2) {
+				console.log('the "play" button *might* have been clicked');
+			}
+
+
+		}
+
+    $(function() {
+      $('input').bind('click', function() {
+
+        var id = this.id.replace('check_', '');
+        $('#' + id).slideUp(700, function () {
+          this.remove();
+        });
+      });
+    });
+    </script>
 </body>
 </html>

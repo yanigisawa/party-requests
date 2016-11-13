@@ -1,22 +1,44 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% for req in model.requests %}
-    <p>
-        <dl class='dl-horizontal'>
-            <dt >Dance</dt>
-            <dd >{{ req.dance }}</dd>
-            <dt >Song</dt>
-            <dd >{{ req.songTitle}}</dd>
-            <dt >Artist</dt>
-            <dd >{{ req.artist}}</dd>
-            {% if req.note %}
-            <dt >Note</dt>
-            <dd >{{ req.note }} </dd>
-            {% endif %}
-        </dl>
-        {{ req.youTubeEmbed|safe }}
-    </p>
-    <hr/>
+<div class="">
+{% for row in model.rows %}
+    <div class="row">
+    {% for req in row %}
+        <div class="col-md-6" id="song_{{ req.id }}">
+            <div class="row">
+                <div class='col-md-12'>
+                <dl class='dl-horizontal'>
+                    <dt>Dance</dt>
+                    <dd>{{ req.dance }}</dd>
+                    <dt>Song</dt>
+                    <dd>{{ req.songTitle}}</dd>
+                    <dt>Artist</dt>
+                    <dd>{{ req.artist}}</dd>
+                    <dt>
+                    </dt>
+                    <dd>
+                    </dd>
+                    {% if req.note %}
+                        <dt>Note</dt>
+                        <dd>{{ req.note }} </dd>
+                    {% endif %}
+                </dl>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="col-md-3">
+                    <input value='Remove' type='button' id='check_song_{{ req.id }}' class='btn'>
+                </div>
+            </div>
+            <div class="row">
+                <div class='col-md-12'>
+                {{ req.youTubeEmbed|safe }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
 {% endfor %}
+</div>
 {% endblock %}
