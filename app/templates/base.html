@@ -56,44 +56,11 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script language='javascript'>
     
-		function getStateName(stateId) {
-			switch (stateId) {
-			  case -1: return 'unstarted';
-        case 0: return 'ended';
-        case 1: return 'playing';
-        case 2: return 'pause';
-        case 3: return 'buffering';
-        case 5: return 'video cued';
-        default: return 'other state';
-			}
-		}
-
-		function player_state_changed(state) {
-			/* This event is fired whenever the player's state changes.
-				Possible values are:
-				- unstarted (-1)
-				- ended (0)
-				- playing (1)
-				- paused (2) 
-				- buffering (3)
-				- video cued (5). 
-				When the SWF is first loaded it will broadcast an unstarted (-1) event.
-				When the video is cued and ready to play it will broadcast a video cued event (5).
-			*/
-
-			console.log('state ' + state + ' triggered. Name: ' + getStateName(state));
-			if (state == 1 || state == 2) {
-				console.log('the "play" button *might* have been clicked');
-			}
-
-
-		}
-
     $(function() {
       $('input').bind('click', function() {
 
         var id = this.id.replace('check_', '');
-        $('#' + id).slideUp(700, function () {
+        $('#' + id).toggle(700, function () {
           this.remove();
         });
       });

@@ -5,7 +5,7 @@
 {% for row in model.rows %}
     <div class="row">
     {% for req in row %}
-        <div class="col-md-6" id="song_{{ req.id }}">
+        <div class="col-md-4 video" id="song_{{ req.id }}">
             <div class="row">
                 <div class='col-md-12'>
                 <dl class='dl-horizontal'>
@@ -28,7 +28,7 @@
             </div>
             <div class="row" style="margin-bottom: 20px;">
                 <div class="col-md-3">
-                    <input value='Remove' type='button' id='check_song_{{ req.id }}' class='btn'>
+                    <input value='Remove' type='button' id='check_song_{{ req.id }}' class='btn btn-danger'>
                 </div>
             </div>
             <div class="row">

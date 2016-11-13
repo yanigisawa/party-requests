@@ -43,7 +43,14 @@ class PartyRequest():
 
     @property
     def youTubeEmbed(self):
-        return self._youTubeEmbed.decode('utf-8')
+        embedCode = self._youTubeEmbed.decode('utf-8')
+        embedCode = embedCode.replace('width="560"', 'width="200"')
+        embedCode = embedCode.replace('width="500"', 'width="200"')
+        embedCode = embedCode.replace('width="420"', 'width="200"')
+        embedCode = embedCode.replace('height="283"', 'height="200"')
+        embedCode = embedCode.replace('height="315"', 'height="200"')
+
+        return embedCode
 
     @property
     def order(self):
@@ -110,10 +117,6 @@ def getRowsFromRequests(requests):
     row = []
     count = 0
     for req in orderedRequests:
-        # if len(row) == 2:
-        #     rows.append(row)
-        #     row = []
-
         req.id = count
         row.append(req)
         count += 1
