@@ -1,0 +1,31 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+
+[packages]
+cffi = "*"
+cryptography = "*"
+"enum34" = "==1.0.4"
+gspread = "==0.2.5"
+"httplib2" = "==0.9.1"
+idna = "*"
+ipaddress = "==1.0.7"
+itsdangerous = "==0.24"
+"oauth2client" = "==1.4.11"
+"pyasn1" = "==0.1.7"
+"pyasn1-modules" = "==0.0.5"
+pycparser = "==2.14"
+requests = "==2.13.0"
+rsa = "==3.1.4"
+six = "==1.9.0"
+Flask = "==0.10.1"
+"Jinja2" = "==2.7.3"
+MarkupSafe = "==0.23"
+pyOpenSSL = "==17.5.0"
+Werkzeug = "==0.9.6"
+
+[requires]
+python_version = "2.7"
