@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "562af1b3ebbdf82e2c355e511c47f91a0937b27a6d4c310e83b6e5309aa1fb7e"
+            "sha256": "4ebca45f1f6af3a721dcf52c9fe4e8993bad6b90f24c8a62da80cbf0e9cae6bf"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "2.7"
+            "python_version": "3.6"
         },
         "sources": [
             {
@@ -66,7 +66,7 @@
                 "sha256:2335065e6395b9e67ca716de5f7526736bfa6ceead690adf616d925bdc622b13",
                 "sha256:5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7"
             ],
-            "markers": "python_version >= '2.7' and python_version != '3.0.*' and python_version != '3.1.*' and python_version != '3.2.*' and python_version != '3.3.*'",
+            "markers": "python_version != '3.3.*' and python_version != '3.2.*' and python_version != '3.0.*' and python_version >= '2.7' and python_version != '3.1.*'",
             "version": "==7.0"
         },
         "cryptography": {
@@ -96,11 +96,13 @@
         },
         "enum34": {
             "hashes": [
-                "sha256:7583d80aca2a2b2a8a411f141c4d744de06a6bc43a32253f6b81d14d48f6c90e",
-                "sha256:d3c19f26a6a34629c18c775f59dfc5dd595764c722b57a2da56ebfb69b94e447"
+                "sha256:2d81cbbe0e73112bdfe6ef8576f2238f2ba27dd0d55752a776c41d38b7da2850",
+                "sha256:644837f692e5f550741432dd3f223bbb9852018674981b1664e5dc339387588a",
+                "sha256:6bd0f6ad48ec2aa117d3d141940d484deccda84d4fcd884f5c3d93c23ecd8c79",
+                "sha256:8ad8c4783bf61ded74527bffb48ed9b54166685e4230386a9ed9b1279e2df5b1"
             ],
             "index": "pypi",
-            "version": "==1.0.4"
+            "version": "==1.1.6"
         },
         "flask": {
             "hashes": [
@@ -198,7 +200,7 @@
                 "sha256:2c10cfba46a52c0b0950118981d61e72c1e5b1aac451ca1bc77de1a679456773"
             ],
             "index": "pypi",
-            "markers": "python_version >= '2.7' and python_version != '3.0.*' and python_version != '3.1.*' and python_version != '3.2.*' and python_version != '3.3.*'",
+            "markers": "python_version >= '2.7' and python_version != '3.2.*' and python_version != '3.3.*' and python_version != '3.0.*' and python_version != '3.1.*'",
             "version": "==17.5.0"
         },
         "requests": {

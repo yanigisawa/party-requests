@@ -6,39 +6,39 @@
 # To decode a byte string as text: var.decode(encoding)
 
 class PartyRequest():
-    def __init__(self, 
-            request = "", 
-            dance = "", 
-            songTitle = "", 
-            artist = "", 
-            youTubeEmbed = "", 
+    def __init__(self,
+            request = "",
+            dance = "",
+            songTitle = "",
+            artist = "",
+            youTubeEmbed = "",
             note = ""):
         self._request = request
-        self._dance = dance.encode('utf-8').strip()
-        self._songTitle = songTitle.encode('utf-8').strip()
-        self._artist = artist.encode('utf-8').strip()
-        self._youTubeEmbed = youTubeEmbed.encode('utf-8').strip()
-        self.note = note.encode('utf-8').strip()
+        self._dance = dance
+        self._songTitle = songTitle
+        self._artist = artist
+        self._youTubeEmbed = youTubeEmbed
+        self.note = note.strip()
 
     @property
     def request(self):
-        return self._request.decode('utf-8')
+        return self._request
 
     @property
     def dance(self):
-        return self._dance.decode('utf-8')
+        return self._dance
 
     @property
     def songTitle(self):
-        return self._songTitle.decode('utf-8')
+        return self._songTitle
 
     @property
     def artist(self):
-        return self._artist.decode('utf-8')
+        return self._artist
 
     @property
     def youTubeEmbed(self):
-        embedCode = self._youTubeEmbed.decode('utf-8')
+        embedCode = self._youTubeEmbed
         embedCode = embedCode.replace('width="560"', 'width="200"')
         embedCode = embedCode.replace('width="500"', 'width="200"')
         embedCode = embedCode.replace('width="420"', 'width="200"')

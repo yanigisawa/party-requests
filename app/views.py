@@ -3,7 +3,7 @@ from flask import render_template, request, Markup
 import gspread
 import os
 from oauth2client.client import SignedJwtAssertionCredentials
-from model import PartyRequest
+from .model import PartyRequest
 
 def getRequestsWorkSheet():
     """
@@ -14,12 +14,13 @@ def getRequestsWorkSheet():
     """
     username = os.environ.get('PARTY_REQUESTS_USER')
     password = os.environ.get('PARTY_REQUESTS_PASSWORD')
+
     if not username or not password:
         raise StandardError('Could not find username or password environment variables.')
 
     scope = ['https://spreadsheets.google.com/feeds']
 
-    credentials = SignedJwtAssertionCredentials(username, password, scope)
+    credentials = SignedJwtAssertionCredentials(username, bytes(password, 'utf-8'), scope)
 
     gc = gspread.authorize(credentials)
 
@@ -29,7 +30,7 @@ def getRequestsWorkSheet():
 
 def getRequestFromWorksheetRow(row):
     request = PartyRequest(
-       request = row[0], 
+       request = row[0],
         dance = row[1],
         songTitle = row[2],
         artist = row[3],
@@ -57,6 +58,7 @@ def getRowsFromRequests(requests):
     rows = []
     row = []
     count = 0
+
     for req in orderedRequests:
         req.id = count
         row.append(req)
