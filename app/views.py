@@ -1,26 +1,28 @@
 from app import app
+import json
 from flask import render_template, request, Markup
 import gspread
 import os
-from oauth2client.client import SignedJwtAssertionCredentials
+from oauth2client.service_account import ServiceAccountCredentials
+
+
 from .model import PartyRequest
 
 def getRequestsWorkSheet():
     """
-    Google recently (4/20/2015) removed the ability to use an App Specific
-    password to authenticate with an account. As such, the user and password
-    fields should be filled with the JWT token client_email and
-    private_key fields instead of an actual email and App Specific password
+    Google recently (2019) deprecated the Google Sheets API v3.
+    Fortunately the gspread Python API was updated to the most recent.
+    However the authentication needed to be updated to use
     """
-    username = os.environ.get('PARTY_REQUESTS_USER')
-    password = os.environ.get('PARTY_REQUESTS_PASSWORD')
 
-    if not username or not password:
+    json_creds = os.environ.get("JSON_CREDENTIALS")
+    if not json_creds:
         raise StandardError('Could not find username or password environment variables.')
 
-    scope = ['https://spreadsheets.google.com/feeds']
+    scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 
-    credentials = SignedJwtAssertionCredentials(username, bytes(password, 'utf-8'), scope)
+    cred_dict = json.loads(json_creds)
+    credentials = ServiceAccountCredentials.from_json_keyfile_dict(cred_dict, scope)
 
     gc = gspread.authorize(credentials)
 
