@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [dev-packages]
+black = "*"
 
 [packages]
 cffi = "*"
@@ -29,3 +30,6 @@ Werkzeug = "*"
 
 [requires]
 python_version = "3.6"
+
+[pipenv]
+allow_prereleases = true
