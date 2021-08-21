@@ -30,5 +30,24 @@ def audit():
     print("Total {0} - Failed {1}".format(rowCount, len(rows)))
 
 
+def test_individual_iframe():
+    src = """
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/ym1eDeOxq14" frameborder="0" allowfullscreen></iframe>
+    """
+    begin = src.find('src="') + 5
+    end = src.find('"', begin)
+    url = src[begin:end]
+    if url[:4] != "http":
+        url = "http:" + url
+    r = requests.get(url)
+
+    print(f"response: {r.text}")
+    return (
+        r.text.find("<title>YouTube</title>") > 0
+        or r.text.find("<span>Video unavailable</span>") > 0
+    )
+
+
 if __name__ == "__main__":
-    audit()
+    # audit()
+    test_individual_iframe()
