@@ -12,12 +12,12 @@ def getRequestsWorkSheet():
     """
     Google recently (2019) deprecated the Google Sheets API v3.
     Fortunately the gspread Python API was updated to the most recent.
-    However the authentication needed to be updated to use
+    However the authentication needed to be updated to use JSON Credentials
     """
 
     json_creds = os.environ.get("JSON_CREDENTIALS")
     if not json_creds:
-        raise StandardError('Could not find JSON_CREDENTIALS environment variables.')
+        raise RuntimeError('Could not find JSON_CREDENTIALS environment variables.')
 
     scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 
